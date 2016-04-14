@@ -35,7 +35,7 @@ var lookupAcronym = function() {
 }
 
 
-for(var i=0; i < data.length; i++) {
+for(var i=0; i < data.length + 1; i++) {
     dictionary[data[i]['name'].toUpperCase().replace(/[^\w\s]/gi , '')] = {'Acronym': data[i]['Acronym'], 'Word': data[i]['Word'], 'Definition': data[i]['Definition']};
 }
 
