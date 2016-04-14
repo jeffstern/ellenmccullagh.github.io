@@ -55,7 +55,8 @@ $("#AcronymInput").focusout(function() {
 
 $("#AcronymInput" ).keyup(lookupAcronym);
 
-function getRandomInt(min, max + 1) {
+function getRandomInt(min, max) {
+  max ++
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
