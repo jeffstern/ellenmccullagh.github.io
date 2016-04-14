@@ -24,8 +24,8 @@ var lookupAcronym = function() {
         }
     }
     else if(inputValue.length > 0){
-        //$("#response").addClass("notfound");
-        //$("#response").html(inputValue + " is not in the acronym dictionary. <b><a href='https://docs.google.com/a/girlswhocode.com/spreadsheets/d/12Mfkk63yxsbKDZQFhLF4ZBLW-lH8dM7syPEcZLo4Qas/edit?usp=sharing' target='_blank'>Add it here</a></b>.")
+        $("#response").addClass("notfound");
+        $("#response").html(inputValue + " is not in the acronym dictionary. <b><a href='https://docs.google.com/a/girlswhocode.com/spreadsheets/d/12Mfkk63yxsbKDZQFhLF4ZBLW-lH8dM7syPEcZLo4Qas/edit?usp=sharing' target='_blank'>Add it here</a></b>.")
     }
     else {
         $("#response").html("");
