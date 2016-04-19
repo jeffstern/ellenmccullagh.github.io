@@ -1,12 +1,27 @@
 window.onload = function() { init() };
 
-var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1p1DUEkzQ6qIQvZRuTcxoSz_AKO6gUJfLWe4cDAxJ0IM/pubhtml';
+//var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1p1DUEkzQ6qIQvZRuTcxoSz_AKO6gUJfLWe4cDAxJ0IM/pubhtml';
+
+
+
+/*
+console.log("hello");
+$("#setsheet").click(function() {
+  console.log("I was pressed");
+  new_spreadsheet = $("#SheetURL").val();
+  public_spreadsheet_url = new_spreadsheet;
+  //init();
+});
+*/
+
+var public_spreadsheet_url = window.prompt("Public Google Sheet URL: ");
 
 function init() {
 Tabletop.init( { key: public_spreadsheet_url,
                  callback: showInfo,
                  simpleSheet: true } )
 }
+
 
 dictionary = {}
 
