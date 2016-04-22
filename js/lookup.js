@@ -1,85 +1,50 @@
-window.onload = function() { init() };
+var url;
+var names;
 
-//var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1p1DUEkzQ6qIQvZRuTcxoSz_AKO6gUJfLWe4cDAxJ0IM/pubhtml';
+window.onload = function() { 
+  url = localStorage.getItem("url");
+  names = localStorage.getItem("names");
+  $("#SheetID").val(url);
+  if(names) {
+    names = names.split(",");
+  } else {
+    init(url); 
+  }
 
+  $("#random").click(function() {
+      name
+      var randomInt = getRandomInt(0,names.length-1);
+      $("#AcronymInput").html(names[randomInt]);
+  });
 
+  $("#newsheet").click(function() {
+      var url = $("#SheetID").val();
+      init(url);
+  });
 
-/*
-console.log("hello");
-$("#setsheet").click(function() {
-  console.log("I was pressed");
-  new_spreadsheet = $("#SheetURL").val();
-  public_spreadsheet_url = new_spreadsheet;
-  //init();
-});
-*/
+};
 
-var public_spreadsheet_url = window.prompt("Public Google Sheet URL: ");
-
-function init() {
-Tabletop.init( { key: public_spreadsheet_url,
-                 callback: showInfo,
-                 simpleSheet: true } )
+function init(public_spreadsheet_url) {
+  $('#random').attr('disabled','disabled');
+  Tabletop.init( { key: public_spreadsheet_url,
+                   callback: showInfo,
+                   simpleSheet: true } )
 }
-
-
-dictionary = {}
 
 function showInfo(data, tabletop) {
-console.log(data);
+  localStorage.setItem("url", url);
+  names = [];
+  for (var key in data) {
+    console.log(names);
+    names.push(data[key]['name']);
+  }
+  localStorage.setItem("names", names)
 
-var lookupAcronym = function() {
-    inputValue = $("#AcronymInput").val().toUpperCase().replace(/[^\w\s]/gi, '');
-    $("#definition").html('');
-    if(dictionary[inputValue]) {
-        $("#response").removeClass("notfound");
-        $("#response").html("<b>" + dictionary[inputValue]['Acronym'] + "</b>: " + dictionary[inputValue]['Word'])
-        if(dictionary[inputValue]['Definition']) {
-            $("#definition").html(dictionary[inputValue]['Definition']);
-        }
-    }
-    else if(inputValue.length > 0){
-        $("#response").addClass("notfound");
-        $("#response").html(inputValue + " is not in the acronym dictionary. <b><a href='https://docs.google.com/a/girlswhocode.com/spreadsheets/d/12Mfkk63yxsbKDZQFhLF4ZBLW-lH8dM7syPEcZLo4Qas/edit?usp=sharing' target='_blank'>Add it here</a></b>.")
-    }
-    else {
-        $("#response").html("");
-    }
-
-//  alert( "Handler for .keydown() called." );
+  $('#random').removeAttr('disabled');
+  console.log(data);
 }
-
-
-for(var i=0; i < data.length; i++) {
-    dictionary[data[i]['name'].toUpperCase().replace(/[^\w\s]/gi , '')] = {'Acronym': data[i]['Acronym'], 'Word': data[i]['Word'], 'Definition': data[i]['Definition']};
-}
-
-$('#request').click(function() {
-
-
-    alert("feature coming soon!");
-});
-
-$("#AcronymInput").focusin(function() {
-    $("#AcronymInput").attr('placeholder','');
-});
-
-$("#AcronymInput").focusout(function() {
-    $("#AcronymInput").attr('placeholder','???');
-});
-
-$("#AcronymInput" ).keyup(lookupAcronym);
 
 function getRandomInt(min, max) {
   max ++;
   return Math.floor(Math.random() * (max - min)) + min;
-}
-
-$("#random").click(function() {
-    var keys = Object.keys(dictionary);
-    var randomInt = getRandomInt(0,keys.length-1);
-    $("#AcronymInput").val(keys[randomInt]);
-    lookupAcronym();
-});
-
 }
