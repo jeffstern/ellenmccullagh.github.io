@@ -26,13 +26,13 @@ window.onload = function() {
 
 function init(public_spreadsheet_url) {
   $('#random').attr('disabled','disabled');
+  localStorage.setItem("url", public_spreadsheet_url);
   Tabletop.init( { key: public_spreadsheet_url,
                    callback: showInfo,
                    simpleSheet: true } )
 }
 
 function showInfo(data, tabletop) {
-  localStorage.setItem("url", url);
   names = [];
   for (var key in data) {
     console.log(names);
