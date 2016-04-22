@@ -12,12 +12,12 @@ window.onload = function() {
   }
 
   $("#random").click(function() {
-      name
       var randomInt = getRandomInt(0,names.length-1);
-      $("#AcronymInput").html(names[randomInt]);
+      $("#resultdisplay").html(names[randomInt]);
   });
 
   $("#newsheet").click(function() {
+      $("#resultdisplay").html("");
       var input = $("#SheetID").val();
       if(input.startsWith("https://docs.google.com/spreadsheets/")){
         init(input);
