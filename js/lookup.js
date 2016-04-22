@@ -18,8 +18,15 @@ window.onload = function() {
   });
 
   $("#newsheet").click(function() {
-      var url = $("#SheetID").val();
-      init(url);
+      var input = $("#SheetID").val();
+      if(input.startsWith("https://docs.google.com/spreadsheets/")){
+        init(input);
+      }
+      else {
+        names = input.split(",");
+        localStorage.setItem("url",names);
+        localStorage.setItem("names",names);
+      }
   });
 
 };
