@@ -4,7 +4,9 @@ var names;
 window.onload = function() { 
   url = localStorage.getItem("url");
   names = localStorage.getItem("names");
-  $("#SheetID").val(url);
+  if(url) {
+    $("#SheetID").val(url);
+  }
   if(names) {
     names = names.split(",");
   } else {
